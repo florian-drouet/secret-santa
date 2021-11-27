@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 FROM_EMAIL  = os.environ["FROM_EMAIL"]
-FROM_PWD    = os.environ["MDP_GMAIL"]
+FROM_PWD    = os.environ["FROM_PWD"]
 SMTP_SERVER =  os.environ["SMTP_SERVER"]
 SMTP_PORT   = os.environ["SMTP_PORT"]
 
@@ -59,11 +59,11 @@ def get_mails(search_keywords):
 
     return names, emails, wish_list
 
-def send_mails(dict_giver_receiver, emails):
+def send_mails(dict_giver_receiver, emails, wish_list):
     #The mail addresses and password
     sender_address = FROM_EMAIL
     sender_pass = FROM_PWD
-    for giver in dict_giver_receiver.keys():
+    for giver in list(dict_giver_receiver.keys()):
         receiver_address = emails[giver]
         receiver = dict_giver_receiver[giver]
         mail_content = f"""
@@ -86,4 +86,4 @@ Santa Newton \u2764\uFE0F"""
         text = message.as_string()
         session.sendmail(sender_address, receiver_address, text)
         session.quit()
-        return None
+    return None
