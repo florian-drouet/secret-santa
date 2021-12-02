@@ -18,4 +18,6 @@ dict_giver_receiver, random_seed, nb_of_tries = get_giver_receiver(names=names, 
 
 write_logs(dict_giver_receiver, random_seed, nb_of_tries)
 
-#send_mails(dict_giver_receiver=dict_giver_receiver, emails=emails, wish_list=wish_list)
+send_mails(dict_giver_receiver=dict_giver_receiver, emails=emails, wish_list=wish_list)
+
+print("Mails have been successfully sent !")
