@@ -18,8 +18,14 @@ def init_matrix(names, constraints=None):
 
     if constraints is not None:
         for constraint in constraints:
-            guests.loc[constraint[0]][constraint[1]] = 0
-            guests.loc[constraint[1]][constraint[0]] = 0
+            if constraint[2] == "couple":
+                guests.loc[constraint[0]][constraint[1]] = 0
+                guests.loc[constraint[1]][constraint[0]] = 0
+            elif constraint[2] == "unique":
+                guests.loc[constraint[0]][constraint[1]] = 0
+            else:
+                print(f"WARNING: constraint type should be 'couple' or 'unique', {constraint[2]} has been entered")
+                sys.exit(1)
     
     return guests
 
@@ -35,7 +41,6 @@ def get_giver_receiver(names, constraints):
         nb_of_tries += 1
         dict_giver_receiver = dict()
         guests = init_matrix(names=names, constraints=constraints)
-        print(guests)
         random_givers = random.sample(list(guests.index), k=len(names))
             
         for random_giver in random_givers:
