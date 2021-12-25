@@ -77,6 +77,14 @@ def get_mails(search_keywords):
                             pass
                         if content_type == "text/plain":
                             email_body = body.strip()
+                else:
+                    # extract content type of email
+                    content_type = msg.get_content_type()
+                    # get the email body
+                    body = msg.get_payload(decode=True).decode()
+                    if content_type == "text/plain":
+                        # print only text email parts
+                        email_body = body.strip()
         wish_list[explicit_name] = email_body
         emails[explicit_name] = explicit_address
 

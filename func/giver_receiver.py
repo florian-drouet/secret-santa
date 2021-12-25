@@ -35,6 +35,11 @@ def get_giver_receiver(names, constraints):
 
     guests = init_matrix(names=names, constraints=constraints)
     random_seed = random.randrange(1000)
+    initial_seed = random_seed
+
+    # For reproductibility
+    # random.seed(random_seed)
+    
     nb_of_tries = 0
 
     while guests.sum().sum() != 0:
@@ -52,4 +57,4 @@ def get_giver_receiver(names, constraints):
             guests.loc[receiver, random_giver] = 0
             dict_giver_receiver[random_giver] = receiver
     
-    return dict_giver_receiver, random_seed, nb_of_tries
+    return dict_giver_receiver, initial_seed, nb_of_tries
